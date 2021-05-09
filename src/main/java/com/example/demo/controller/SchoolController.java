@@ -7,7 +7,10 @@ import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Future;
 
 @RestController
 @RequestMapping("/api/school")
@@ -32,10 +35,10 @@ public class SchoolController {
     }
 
     @PostMapping("/createPresident")
-    public void createPresident(@RequestBody DTO_createPresident dto) {
+    public CompletableFuture<Object> createPresident(@RequestBody DTO_createPresident dto) {
         UUID schoolId = UUID.randomUUID();
         UUID presidentId = UUID.randomUUID();
 
-        commandGateway.send(new CreatePresidentCommand(schoolId, dto.schoolName, presidentId, dto.presidentName));
+        return commandGateway.sendAndWait(new CreatePresidentCommand(schoolId, dto.schoolName, presidentId, dto.presidentName));
     }
 }

@@ -26,7 +26,7 @@ public class SchoolProjector {
         schoolView.setId(evt.getId());
         schoolView.setName(evt.getName());
 
-        repository.save(schoolView);
+        repository.saveAndFlush(schoolView);
     }
 
     @EventHandler

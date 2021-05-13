@@ -4,6 +4,7 @@ import com.example.demo.messages.CreateShoolCommand;
 import com.example.demo.messages.SchoolCreatedEvent;
 import com.example.demo.messages.SchoolSelectedForPresidentEvent;
 import com.example.demo.messages.SelectSchoolForPresidentCommand;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
@@ -15,6 +16,7 @@ import java.util.UUID;
 
 @Slf4j
 @Aggregate
+@Data
 public class School {
     @AggregateIdentifier
     private UUID id;
